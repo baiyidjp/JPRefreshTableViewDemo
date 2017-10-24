@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, JPHiddenRefresh) {
 
 @protocol JPRefreshTableViewDataSource <NSObject>
 
+@optional
 /**
  JPRefreshTableViewDataSource
  

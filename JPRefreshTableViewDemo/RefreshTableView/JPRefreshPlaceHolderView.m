@@ -40,7 +40,7 @@ static CGFloat kImageH = 80;
     CGFloat kHeight = [UIScreen mainScreen].bounds.size.height;
     
     UIImageView * imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kImageW, kImageH)];
-    CGPoint imageCenter = CGPointMake(kWidth/2, kHeight/2);
+    CGPoint imageCenter = CGPointMake(kWidth/2, kHeight/2-kImageH/2);
     imageV.center = imageCenter;
     imageV.image = [UIImage imageNamed:noneDataImageName];
     [self addSubview:imageV];

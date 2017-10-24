@@ -28,12 +28,12 @@
     self.tableView.refreshDelegate = self;
     self.tableView.refreshDataSource = self;
     
-    [self.tableView jp_reloadData];
     _dataArray = [NSMutableArray array];
     for (int i = 0; i < 20; i++) {
         NSString *str = [NSString stringWithFormat:@"死数据--%d",i];
         [_dataArray addObject:str];
     }
+    [self.tableView jp_reloadData];
 }
 //代理 刷新回调
 - (void)tableView:(JPRefreshTableView *)tablView refreshType:(JPRefreshType)refreshType {

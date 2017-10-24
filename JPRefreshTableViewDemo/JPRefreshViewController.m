@@ -34,10 +34,11 @@
     [self.view addSubview:_tableView];
     
     _dataArray = [NSMutableArray array];
-    for (int i = 0; i < 20; i++) {
-        NSString *str = [NSString stringWithFormat:@"死数据--%d",i];
-        [_dataArray addObject:str];
-    }
+//    for (int i = 0; i < 20; i++) {
+//        NSString *str = [NSString stringWithFormat:@"死数据--%d",i];
+//        [_dataArray addObject:str];
+//    }
+    [_tableView jp_reloadData];
 }
 
 
@@ -63,7 +64,7 @@
     [_dataArray insertObject:@"下拉--新数据" atIndex:0];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_tableView.mj_header endRefreshing];
-        [_tableView reloadData];
+        [_tableView jp_reloadData];
     });
 }
 
@@ -72,7 +73,7 @@
     [_dataArray addObject:@"上拉--新数据"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_tableView.mj_footer endRefreshing];
-        [_tableView reloadData];
+        [_tableView jp_reloadData];
     });
     
 }
