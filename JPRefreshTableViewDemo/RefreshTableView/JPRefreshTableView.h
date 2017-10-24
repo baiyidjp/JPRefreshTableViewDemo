@@ -47,6 +47,13 @@ typedef NS_ENUM(NSInteger, JPHiddenRefresh) {
  */
 - (JPHiddenRefresh)hiddenRefreshInTableView:(JPRefreshTableView *)tablView;
 
+/**
+ 返回自定义占位View
+
+ @return view
+ */
+- (UIView *)setPlaceHolderViewInTableView:(JPRefreshTableView *)tableView;
+
 @end
 
 
@@ -59,5 +66,10 @@ typedef NS_ENUM(NSInteger, JPHiddenRefresh) {
 @property(nonatomic,weak) id<JPRefreshTableViewDelegate> refreshDelegate;
 
 @property(nonatomic,weak) id<JPRefreshTableViewDataSource> refreshDataSource;
+
+- (void)jp_reloadData;
+
+/** PlaceHolderView */
+@property(nonatomic,strong) UIView *placeHolderView;
 
 @end

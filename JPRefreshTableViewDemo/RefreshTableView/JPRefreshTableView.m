@@ -7,7 +7,10 @@
 //
 
 #import "JPRefreshTableView.h"
+#import "JPRefreshPlaceHolderView.h"
+#import <objc/runtime.h>
 
+const char *placeHolderViewKey = "placeHolderViewKey";
 
 @implementation JPRefreshTableView
 
@@ -88,6 +91,60 @@
         [self.refreshDelegate tableView:self refreshType:JPRefreshType_Footer];
     }
     
+}
+
+- (void)jp_reloadData {
+    
+    [self reloadData];
+    [self p_CheckDataSource];
+}
+
+- (UIView *)placeHolderView {
+    
+    return objc_getAssociatedObject(self, placeHolderViewKey);
+}
+
+- (void)setPlaceHolderView:(UIView *)placeHolderView {
+    
+    objc_setAssociatedObject(self, placeHolderViewKey, placeHolderView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+#pragma mark -监测是否为空数据源
+- (void)p_CheckDataSource {
+    
+    BOOL isNoData = YES;
+    
+    id<UITableViewDataSource> source = self.dataSource;
+    NSInteger sections = 1;
+    if ([source respondsToSelector:@selector(numberOfSectionsInTableView:)]) {
+        sections = [source numberOfSectionsInTableView:self];
+    }
+    for (NSInteger i = 0; i < sections ; i++) {
+        NSInteger rows = [source tableView:self numberOfRowsInSection:i];
+        if (rows) {
+            isNoData = NO;
+        }
+    }
+    //互斥的存在
+    if (!isNoData != !self.placeHolderView) {
+        
+        if (isNoData) {
+            if ([self.refreshDataSource respondsToSelector:@selector(setPlaceHolderViewInTableView:)]) {
+                self.placeHolderView = [self.refreshDataSource setPlaceHolderViewInTableView:self];
+            }else {
+                self.placeHolderView = [[JPRefreshPlaceHolderView alloc] initWithFrame:CGRectZero];//自己写
+            }
+            self.placeHolderView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+            [self addSubview:self.placeHolderView];
+        }else {
+            [self.placeHolderView removeFromSuperview];
+            self.placeHolderView = nil;
+        }
+    }else if (isNoData) {
+        //永远保证占位View在最上层
+        [self.placeHolderView removeFromSuperview];
+        [self addSubview:self.placeHolderView];
+    }
 }
 
 

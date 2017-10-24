@@ -34,6 +34,7 @@
 		F5CED4CE1F94990B0068A43D /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CED4BA1F94942A0068A43D /* UIScrollView+MJRefresh.m */; };
 		F5CED4CF1F94990B0068A43D /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CED4BC1F94942A0068A43D /* UIView+MJExtension.m */; };
 		F5CED4D21F94A3150068A43D /* JPRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CED4D11F94A3150068A43D /* JPRefreshViewController.m */; };
+		F5E050F31F9F1FE300190698 /* JPRefreshPlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E050F21F9F1FE300190698 /* JPRefreshPlaceHolderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,8 @@
 		F5CED4BC1F94942A0068A43D /* UIView+MJExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		F5CED4D01F94A3150068A43D /* JPRefreshViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPRefreshViewController.h; sourceTree = "<group>"; };
 		F5CED4D11F94A3150068A43D /* JPRefreshViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPRefreshViewController.m; sourceTree = "<group>"; };
+		F5E050F11F9F1FE300190698 /* JPRefreshPlaceHolderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPRefreshPlaceHolderView.h; sourceTree = "<group>"; };
+		F5E050F21F9F1FE300190698 /* JPRefreshPlaceHolderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPRefreshPlaceHolderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,8 @@
 				F5CED48E1F94942A0068A43D /* MJRefresh */,
 				F5CED48B1F9494110068A43D /* JPRefreshTableView.h */,
 				F5CED48C1F9494110068A43D /* JPRefreshTableView.m */,
+				F5E050F11F9F1FE300190698 /* JPRefreshPlaceHolderView.h */,
+				F5E050F21F9F1FE300190698 /* JPRefreshPlaceHolderView.m */,
 			);
 			path = RefreshTableView;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				F5CED4CF1F94990B0068A43D /* UIView+MJExtension.m in Sources */,
 				F5CED4BF1F9498C60068A43D /* MJRefreshAutoStateFooter.m in Sources */,
 				F5CED4BE1F9498590068A43D /* MJRefreshNormalHeader.m in Sources */,
+				F5E050F31F9F1FE300190698 /* JPRefreshPlaceHolderView.m in Sources */,
 				F5CED4BD1F9498520068A43D /* MJRefreshAutoNormalFooter.m in Sources */,
 				F5CED4791F9493BE0068A43D /* ViewController.m in Sources */,
 				F5CED4841F9493BE0068A43D /* main.m in Sources */,
