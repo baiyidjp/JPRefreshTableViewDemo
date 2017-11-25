@@ -50,7 +50,8 @@ typedef NS_ENUM(NSInteger, JPHiddenRefresh) {
 
 /**
  返回自定义占位View
-
+ 自动处理适应tableView的frame
+ 
  @return view
  */
 - (UIView *)setPlaceHolderViewInTableView:(JPRefreshTableView *)tableView;

@@ -132,9 +132,9 @@ const char *placeHolderViewKey = "placeHolderViewKey";
             if ([self.refreshDataSource respondsToSelector:@selector(setPlaceHolderViewInTableView:)]) {
                 self.placeHolderView = [self.refreshDataSource setPlaceHolderViewInTableView:self];
             }else {
-                self.placeHolderView = [[JPRefreshPlaceHolderView alloc] initWithFrame:CGRectZero];//自己写
+                self.placeHolderView = [[JPRefreshPlaceHolderView alloc] init];//自己写
             }
-            self.placeHolderView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+            self.placeHolderView.frame = self.frame;
             [self addSubview:self.placeHolderView];
         }else {
             [self.placeHolderView removeFromSuperview];

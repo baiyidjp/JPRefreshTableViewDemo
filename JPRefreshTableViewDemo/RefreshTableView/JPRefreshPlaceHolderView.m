@@ -19,42 +19,89 @@ static NSString *filedNetImageName = @"D_wuwangluo";
 static CGFloat kImageW = 80;
 static CGFloat kImageH = 80;
 
+@interface JPRefreshPlaceHolderView ()
+
+/** imageV */
+@property(nonatomic,strong) UIImageView *imageV;
+/** tip */
+@property(nonatomic,strong) UILabel *tipLabel;
+
+@end
 
 @implementation JPRefreshPlaceHolderView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+- (instancetype)initWithPlaceHolderImage:(UIImage *)placeHolderImage PlaceHolderTip:(NSString *)placeHolderTip {
+    
+    self = [super init];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         self.userInteractionEnabled = YES;
-        [self p_AddViews];
+        self.placeHolderImage = placeHolderImage;
+        self.placeHolderTip = placeHolderTip;
+        [self p_AddViewsWithImage:placeHolderImage tip:placeHolderTip];
+        
     }
     return self;
 }
 
-#pragma mark -views
-- (void)p_AddViews {
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.userInteractionEnabled = YES;
+        [self p_AddViewsWithImage:nil tip:@""];
+    }
+    return self;
+}
+
+- (void)setFrame:(CGRect)frame {
     
-    CGFloat kWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat kHeight = [UIScreen mainScreen].bounds.size.height;
+    [super setFrame:frame];
     
-    UIImageView * imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kImageW, kImageH)];
-    CGPoint imageCenter = CGPointMake(kWidth/2, kHeight/2-kImageH/2);
-    imageV.center = imageCenter;
-    imageV.image = [UIImage imageNamed:noneDataImageName];
-    [self addSubview:imageV];
+    CGFloat kWidth = frame.size.width;
+    CGFloat kHeight = frame.size.height;
     
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageV.frame),kWidth, 30)];
-    [self addSubview:label];
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = [UIColor blackColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = noneDataText;
+    self.imageV.frame = CGRectMake(0, 0, kImageW, kImageH);
+    self.imageV.center =CGPointMake(kWidth/2, kHeight/2-kImageH/2);
+    self.tipLabel.frame = CGRectMake(0, CGRectGetMaxY(self.imageV.frame),kWidth, 30);
+    if (self.placeHolderImage == nil) {
+        self.tipLabel.center =CGPointMake(kWidth/2, kHeight/2);
+    }
 
 }
 
+#pragma mark -views
+- (void)p_AddViewsWithImage:(UIImage *)placeHolderImage tip:(NSString *)placeHolderTip {
+    
+    UIImageView * imageV = [[UIImageView alloc] init];
+    imageV.image = placeHolderImage;
+    [self addSubview:imageV];
+    self.imageV = imageV;
+    if (placeHolderImage == nil) {
+        imageV.hidden = YES;
+    }
+    
+    UILabel * tipLabel = [[UILabel alloc] init];
+    [self addSubview:tipLabel];
+    tipLabel.font = [UIFont systemFontOfSize:15];
+    tipLabel.textColor = [UIColor blackColor];
+    tipLabel.textAlignment = NSTextAlignmentCenter;
+    tipLabel.text = (placeHolderTip.length) ? placeHolderTip : @"暂无数据~";
+    self.tipLabel = tipLabel;
+}
 
 
+- (void)setPlaceHolderTip:(NSString *)placeHolderTip {
+    
+    _placeHolderTip = placeHolderTip;
+    self.tipLabel.text = placeHolderTip;
+}
+
+- (void)setPlaceHolderImage:(UIImage *)placeHolderImage {
+    
+    _placeHolderImage = placeHolderImage;
+    self.imageV.image = placeHolderImage;
+}
 
 @end

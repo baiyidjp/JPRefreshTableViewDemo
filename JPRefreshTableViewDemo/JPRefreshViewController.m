@@ -8,9 +8,11 @@
 
 #import "JPRefreshViewController.h"
 #import "JPRefreshTableView.h"
+#import "JPRefreshPlaceHolderView.h"
 
 @interface JPRefreshViewController ()<JPRefreshTableViewDataSource,JPRefreshTableViewDelegate,UITableViewDataSource,UITableViewDelegate>
-
+/** placeHolder */
+@property(nonatomic,strong) JPRefreshPlaceHolderView *placeHolderView;
 @end
 
 @implementation JPRefreshViewController
@@ -18,6 +20,16 @@
     JPRefreshTableView  *_tableView;
     NSMutableArray      *_dataArray;
 }
+
+- (JPRefreshPlaceHolderView *)placeHolderView{
+    
+    if (!_placeHolderView) {
+        
+        _placeHolderView = [[JPRefreshPlaceHolderView alloc] initWithPlaceHolderImage:[UIImage imageNamed:@"tututu"] PlaceHolderTip:@"~测试测试~"];
+    }
+    return _placeHolderView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -55,7 +67,13 @@
 //数据 隐藏刷新
 - (JPHiddenRefresh)hiddenRefreshInTableView:(JPRefreshTableView *)tablView {
     //隐藏头部刷新
-    return JPHiddenRefresh_Header;
+    return JPHiddenRefresh_None;
+}
+
+- (UIView *)setPlaceHolderViewInTableView:(JPRefreshTableView *)tableView {
+    
+    self.placeHolderView.placeHolderTip = @"~改变文字~";
+    return self.placeHolderView;
 }
 
 #pragma mark -下拉/上拉

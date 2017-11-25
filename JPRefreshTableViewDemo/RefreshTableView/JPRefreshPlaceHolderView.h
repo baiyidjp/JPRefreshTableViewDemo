@@ -10,4 +10,12 @@
 
 @interface JPRefreshPlaceHolderView : UIView
 
+- (instancetype)initWithPlaceHolderImage:(UIImage *)placeHolderImage PlaceHolderTip:(NSString *)placeHolderTip;
+
+/** 占位图 */
+@property(nonatomic,strong) UIImage *placeHolderImage;
+/** tips */
+@property(nonatomic,strong) NSString *placeHolderTip;
+
+
 @end
