@@ -25,7 +25,11 @@
     
     if (!_placeHolderView) {
         
-        _placeHolderView = [[JPRefreshPlaceHolderView alloc] initWithPlaceHolderImage:[UIImage imageNamed:@"tututu"] PlaceHolderTip:@"~测试测试~"];
+//        _placeHolderView = [[JPRefreshPlaceHolderView alloc] initWithPlaceHolderImage:[UIImage imageNamed:@"tututu"] PlaceHolderTip:@"~测试测试~" Target:self Action:@selector(p_ClickPlaceHolderView)];
+        _placeHolderView = [[JPRefreshPlaceHolderView alloc] initWithPlaceHolderImage:[UIImage imageNamed:@"tututu"] PlaceHolderTip:@"block" completion:^{
+            [self p_ClickPlaceHolderView];
+        }];
+
     }
     return _placeHolderView;
 }
@@ -108,5 +112,13 @@
     cell.textLabel.text = _dataArray[indexPath.row];
     return cell;
 }
+
+#pragma mark -回调
+- (void)p_ClickPlaceHolderView {
+    
+    NSLog(@"%s",__func__);
+    
+}
+
 
 @end

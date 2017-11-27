@@ -7,17 +7,15 @@
 //
 
 #import "JPRefreshPlaceHolderView.h"
-
-//默认的title
-static NSString *noneDataText = @"暂无数据";
-static NSString *filedNetText = @"网络异常,点击屏幕重新加载";
-//默认的图片名
-static NSString *noneDataImageName = @"D_zanwushuju";
-static NSString *filedNetImageName = @"D_wuwangluo";
+#import <objc/message.h>
 
 //图片的宽高
 static CGFloat kImageW = 80;
 static CGFloat kImageH = 80;
+
+#define MsgSend(...) ((void (*)(void *, SEL, UIView *))objc_msgSend)(__VA_ARGS__)
+#define MsgTarget(target) (__bridge void *)(target)
+
 
 @interface JPRefreshPlaceHolderView ()
 
@@ -25,32 +23,53 @@ static CGFloat kImageH = 80;
 @property(nonatomic,strong) UIImageView *imageV;
 /** tip */
 @property(nonatomic,strong) UILabel *tipLabel;
+/** 回调对象 */
+@property (weak, nonatomic) id target;
+/** 回调方法 */
+@property (assign, nonatomic) SEL action;
+/** completion */
+@property(nonatomic,copy) selectedCompletion completion;
 
 @end
 
 @implementation JPRefreshPlaceHolderView
 
-- (instancetype)initWithPlaceHolderImage:(UIImage *)placeHolderImage PlaceHolderTip:(NSString *)placeHolderTip {
-    
-    self = [super init];
-    if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        self.userInteractionEnabled = YES;
-        self.placeHolderImage = placeHolderImage;
-        self.placeHolderTip = placeHolderTip;
-        [self p_AddViewsWithImage:placeHolderImage tip:placeHolderTip];
-        
-    }
-    return self;
-}
-
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        self.userInteractionEnabled = YES;
         [self p_AddViewsWithImage:nil tip:@""];
+    }
+    return self;
+}
+
+- (instancetype)initWithPlaceHolderImage:(UIImage *)placeHolderImage PlaceHolderTip:(NSString *)placeHolderTip {
+    
+    self = [super init];
+    if (self) {
+        [self p_AddViewsWithImage:placeHolderImage tip:placeHolderTip];
+    }
+    return self;
+}
+
+- (instancetype)initWithPlaceHolderImage:(UIImage *)placeHolderImage PlaceHolderTip:(NSString *)placeHolderTip Target:(id)target Action:(SEL)action {
+    
+    self = [super init];
+    if (self) {
+        self.target = target;
+        self.action = action;
+        [self p_AddViewsWithImage:placeHolderImage tip:placeHolderTip];
+    }
+    return self;
+
+}
+
+- (instancetype)initWithPlaceHolderImage:(UIImage *)placeHolderImage PlaceHolderTip:(NSString *)placeHolderTip completion:(selectedCompletion)completion {
+    
+    self = [super init];
+    if (self) {
+        self.completion = completion;
+        [self p_AddViewsWithImage:placeHolderImage tip:placeHolderTip];
     }
     return self;
 }
@@ -74,6 +93,11 @@ static CGFloat kImageH = 80;
 #pragma mark -views
 - (void)p_AddViewsWithImage:(UIImage *)placeHolderImage tip:(NSString *)placeHolderTip {
     
+    self.backgroundColor = [UIColor whiteColor];
+    self.userInteractionEnabled = YES;
+    self.placeHolderImage = placeHolderImage;
+    self.placeHolderTip = placeHolderTip;
+
     UIImageView * imageV = [[UIImageView alloc] init];
     imageV.image = placeHolderImage;
     [self addSubview:imageV];
@@ -102,6 +126,19 @@ static CGFloat kImageH = 80;
     
     _placeHolderImage = placeHolderImage;
     self.imageV.image = placeHolderImage;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    if (self.completion) {
+        self.completion();
+    }
+    
+    if (self.target && self.action) {
+        if ([self.target respondsToSelector:self.action]) {
+            MsgSend(MsgTarget(self.target), self.action, self);
+        }
+    }
 }
 
 @end
