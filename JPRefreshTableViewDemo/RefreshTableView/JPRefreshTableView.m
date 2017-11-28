@@ -99,6 +99,18 @@ const char *placeHolderViewKey = "placeHolderViewKey";
     [self p_CheckDataSource];
 }
 
+- (void)jp_reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [self reloadSections:sections withRowAnimation:animation];
+    [self p_CheckDataSource];
+}
+
+- (void)jp_reloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [self reloadRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+    [self p_CheckDataSource];
+}
+
 - (UIView *)placeHolderView {
     
     return objc_getAssociatedObject(self, placeHolderViewKey);
@@ -134,7 +146,7 @@ const char *placeHolderViewKey = "placeHolderViewKey";
             }else {
                 self.placeHolderView = [[JPRefreshPlaceHolderView alloc] init];//自己写
             }
-            self.placeHolderView.frame = self.frame;
+            self.placeHolderView.frame = self.bounds;
             [self addSubview:self.placeHolderView];
         }else {
             [self.placeHolderView removeFromSuperview];

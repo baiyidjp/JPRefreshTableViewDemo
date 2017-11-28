@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JPRefreshPlaceHolderView.h"
 #import "MJRefresh.h"
 
 //刷新的状态 上拉/下拉
@@ -69,9 +70,15 @@ typedef NS_ENUM(NSInteger, JPHiddenRefresh) {
 
 @property(nonatomic,weak) id<JPRefreshTableViewDataSource> refreshDataSource;
 
-- (void)jp_reloadData;
-
 /** PlaceHolderView */
 @property(nonatomic,strong) UIView *placeHolderView;
 
+/**
+ 无数据加载占位图必须使用这个刷新
+ */
+- (void)jp_reloadData;
+
+- (void)jp_reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation;
+
+- (void)jp_reloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
 @end

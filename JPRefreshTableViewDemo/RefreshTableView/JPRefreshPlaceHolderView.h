@@ -14,14 +14,14 @@ typedef void(^selectedCompletion)();
 
 /**
  基础构造方法
- 
+
  @return 默认的占位View
  */
 - (instancetype)init;
 
 /**
  自定义占位图和文字的构造方法
- 
+
  @param placeHolderImage 占位图
  @param placeHolderTip 占位文字
  @return 带图文的占位View
@@ -30,7 +30,7 @@ typedef void(^selectedCompletion)();
 
 /**
  自定义占位图和文字并附带点击处理(SEL)的构造方法
- 
+
  @param placeHolderImage 占位图
  @param placeHolderTip 占位文字
  @param target 默认传self
@@ -41,7 +41,7 @@ typedef void(^selectedCompletion)();
 
 /**
  自定义占位图和文字并附带点击处理(block)的构造方法
- 
+
  @param placeHolderImage 占位图
  @param placeHolderTip 占位文字
  @param completion 点击的回调
@@ -57,4 +57,3 @@ typedef void(^selectedCompletion)();
 @property(nonatomic,strong) NSString *placeHolderTip;
 
 @end
-
