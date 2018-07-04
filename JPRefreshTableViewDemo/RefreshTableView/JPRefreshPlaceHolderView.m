@@ -61,7 +61,7 @@ static CGFloat kImageH = 103;
         [self p_AddViewsWithImage:placeHolderImage tip:placeHolderTip];
     }
     return self;
-
+    
 }
 
 - (instancetype)initWithPlaceHolderImage:(UIImage *)placeHolderImage PlaceHolderTip:(NSString *)placeHolderTip completion:(selectedCompletion)completion {
@@ -82,12 +82,12 @@ static CGFloat kImageH = 103;
     CGFloat kHeight = frame.size.height;
     
     self.imageV.frame = CGRectMake(0, 0, kImageW, kImageH);
-    self.imageV.center =CGPointMake(kWidth/2, kHeight/2-kImageH/2);
-    self.tipLabel.frame = CGRectMake(0, CGRectGetMaxY(self.imageV.frame),kWidth, 30);
+    self.imageV.center =CGPointMake(kWidth/2, kHeight/2-10);
+    self.tipLabel.frame = CGRectMake(0, CGRectGetMaxY(self.imageV.frame),kWidth, 20);
     if (self.placeHolderImage == nil) {
         self.tipLabel.center =CGPointMake(kWidth/2, kHeight/2);
     }
-
+    
 }
 
 #pragma mark -views
@@ -97,7 +97,7 @@ static CGFloat kImageH = 103;
     self.userInteractionEnabled = YES;
     self.placeHolderImage = placeHolderImage;
     self.placeHolderTip = placeHolderTip;
-
+    
     UIImageView * imageV = [[UIImageView alloc] init];
     imageV.image = placeHolderImage;
     [self addSubview:imageV];
@@ -108,8 +108,8 @@ static CGFloat kImageH = 103;
     
     UILabel * tipLabel = [[UILabel alloc] init];
     [self addSubview:tipLabel];
-    tipLabel.font = [UIFont systemFontOfSize:15];
-    tipLabel.textColor = [UIColor blackColor];
+    tipLabel.font = [UIFont systemFontOfSize:13];
+    tipLabel.textColor = [UIColor colorWithRed:187/255.0 green:187/255.0 blue:187/255.0 alpha:1];
     tipLabel.textAlignment = NSTextAlignmentCenter;
     tipLabel.text = (placeHolderTip.length) ? placeHolderTip : @"暂无数据~";
     self.tipLabel = tipLabel;
@@ -142,3 +142,4 @@ static CGFloat kImageH = 103;
 }
 
 @end
+
